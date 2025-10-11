@@ -1,0 +1,48 @@
+name: MLflow Retraining CI (Advanced)
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  retrain-model:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install mlflow dagshub scikit-learn pandas matplotlib seaborn
+
+      - name: Run MLflow project
+        run: |
+          mlflow run MLProject --env-manager local
+
+      - name: Upload artifacts (Skilled+)
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: trained_model_artifacts
+          path: mlruns/
+
+      - name: Build and Push Docker image (Advanced)
+        if: success()
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          echo "🛠 Building Docker image with MLflow..."
+          mlflow models build-docker -m mlruns/0
+          echo "🔐 Logging in to Docker Hub..."
+          echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin
+          echo "🚀 Pushing image to Docker Hub..."
+          docker tag mlflow-model:latest $DOCKERHUB_USERNAME/msml_ekafanya:latest
+          docker push $DOCKERHUB_USERNAME/msml_ekafanya:latest
