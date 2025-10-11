@@ -25,7 +25,7 @@ jobs:
       - name: Run MLflow project
         run: mlflow run MLProject --env-manager local
 
-      - name: Build and Push Docker image (Advanced)
+      - name:       - name: Build and Push Docker image (Advanced)
         if: success()
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
