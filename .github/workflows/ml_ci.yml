@@ -25,7 +25,7 @@ jobs:
       - name: Run MLflow project
         run: mlflow run MLProject --env-manager local
 
-      - name:       - name: Build and Push Docker image (Advanced)
+      - name:             - name: Build and Push Docker image (Advanced)
         if: success()
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -34,8 +34,16 @@ jobs:
           echo "🛠 Building Docker image from MLflow model..."
           export MODEL_PATH=$(find MLProject -type d -name "model" | head -n 1)
           echo "📦 Found model at: $MODEL_PATH"
-          mlflow models build-docker --model-uri $MODEL_PATH -t $DOCKERHUB_USERNAME/msml_ekafanya:latest
+
+          # Build Docker image pakai MLflow (tanpa -t)
+          mlflow models build-docker --model-uri $MODEL_PATH
+
           echo "🔐 Logging in to Docker Hub..."
           echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin
-          echo "🚀 Pushing image to Docker Hub..."
+
+          echo "🐳 Rename and push image to Docker Hub..."
+          docker tag mlflow-pyfunc:latest $DOCKERHUB_USERNAME/msml_ekafanya:latest
           docker push $DOCKERHUB_USERNAME/msml_ekafanya:latest
+
+          echo "✅ Docker image pushed successfully!"
+
