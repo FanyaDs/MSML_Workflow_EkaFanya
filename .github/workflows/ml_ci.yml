@@ -40,7 +40,7 @@ jobs:
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
           echo "🛠 Building Docker image with MLflow..."
-          mlflow models build-docker -m MLProject/mlruns_model
+          mlflow models build-docker -m MLProject/mlruns_model --build-image python:3.12-slim
           echo "🔐 Logging in to Docker Hub..."
           echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin
           echo "🚀 Pushing image to Docker Hub..."
