@@ -33,15 +33,18 @@ jobs:
           name: trained_model_artifacts
           path: mlruns/
 
+      - name: 
       - name: Build and Push Docker image (Advanced)
         if: success()
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
-          echo "🛠 Building Docker image with MLflow..."
+          echo "🛠 Building Docker image from MLflow model..."
+          export MODEL_PATH=$(find MLProject -type d -name "model" | head -n 1)
+          echo "📦 Found model at: $MODEL_PATH"
+          mlflow models build-docker --model-uri $MODEL_PATH --name $DOCKERHUB_USERNAME/msml_ekafanya:latest
           echo "🔐 Logging in to Docker Hub..."
           echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin
           echo "🚀 Pushing image to Docker Hub..."
-          docker tag mlflow-model:latest $DOCKERHUB_USERNAME/msml_ekafanya:latest
           docker push $DOCKERHUB_USERNAME/msml_ekafanya:latest
