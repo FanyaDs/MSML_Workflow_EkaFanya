@@ -9,6 +9,3 @@ dependencies:
   - dagshub
   - matplotlib
   - seaborn
-  - pip
-  - pip:
-      - numpy

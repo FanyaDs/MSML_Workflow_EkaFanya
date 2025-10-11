@@ -1,4 +1,4 @@
-name: MSML_EkaFanya_CI
+name: MSML_EkaFanya_Workflow
 conda_env: conda.yaml
 entry_points:
   main:
