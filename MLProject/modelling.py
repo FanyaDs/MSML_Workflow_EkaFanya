@@ -8,34 +8,34 @@ import mlflow
 import mlflow.sklearn
 
 def main(data_path):
-    # Muat dataset
     df = pd.read_csv(data_path)
     df = df.dropna(subset=['clean_text', 'sentiment'])
     X = df['clean_text'].astype(str)
     y = df['sentiment'].astype(str)
 
-    # Split data
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    # TF-IDF Vectorizer
     vectorizer = TfidfVectorizer(max_features=5000)
     X_train_tfidf = vectorizer.fit_transform(X_train)
     X_test_tfidf = vectorizer.transform(X_test)
 
-    # Model Random Forest
     rf = RandomForestClassifier(n_estimators=100, random_state=42)
 
-    # Inisialisasi MLflow experiment
     mlflow.set_experiment("EkaFanya_Workflow_CI")
     mlflow.sklearn.autolog()
 
-    # Jalankan training di dalam nested run (fix error run ID)
-    with mlflow.start_run(run_name="RandomForest_CI", nested=True):
+    # Cek apakah sudah ada run aktif (fix error di CI/CD)
+    active_run = mlflow.active_run()
+    if active_run is None:
+        run_ctx = mlflow.start_run(run_name="RandomForest_CI")
+    else:
+        run_ctx = mlflow.start_run(run_name="RandomForest_CI", nested=True)
+
+    with run_ctx:
         rf.fit(X_train_tfidf, y_train)
         preds = rf.predict(X_test_tfidf)
         acc = accuracy_score(y_test, preds)
 
-        # Manual logging tambahan (optional tapi keren buat laporan)
         mlflow.log_param("n_estimators", 100)
         mlflow.log_param("max_features_tfidf", 5000)
         mlflow.log_metric("accuracy", acc)
