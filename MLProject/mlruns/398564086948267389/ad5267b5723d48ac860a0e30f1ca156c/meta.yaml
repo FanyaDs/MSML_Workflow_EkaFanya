@@ -1,0 +1,15 @@
+artifact_uri: file:///content/drive/MyDrive/SMSML_Eka-Fanya-Yohana-Dasilva/Workflow-CI/MLProject/mlruns/398564086948267389/ad5267b5723d48ac860a0e30f1ca156c/artifacts
+end_time: 1760224333923
+entry_point_name: ''
+experiment_id: '398564086948267389'
+lifecycle_stage: active
+run_id: ad5267b5723d48ac860a0e30f1ca156c
+run_name: RF_Workflow_CI
+run_uuid: ad5267b5723d48ac860a0e30f1ca156c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760224308206
+status: 3
+tags: []
+user_id: root
