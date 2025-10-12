@@ -22,9 +22,12 @@ jobs:
         run: |
           pip install mlflow==2.19.0 scikit-learn==1.6.1 pandas numpy
 
+      # 🚀 Jalankan training dari folder Workflow-CI/MLProject (path absolut relatif ke repo)
       - name: Run MLflow Project (Train Model)
         run: |
-          cd Workflow-CI/MLProject
+          cd $GITHUB_WORKSPACE/Workflow-CI/MLProject
+          echo "📂 Current directory: $(pwd)"
+          ls -R
           mlflow run . --env-manager local
 
       - name: Upload model artifacts
