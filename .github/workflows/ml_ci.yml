@@ -25,7 +25,9 @@ jobs:
       - name: Run MLflow Project
         run: |
           echo "📂 Path sekarang: $GITHUB_WORKSPACE"
+          echo "📁 Isi folder root:"
           ls -R "$GITHUB_WORKSPACE"
+          echo "🚀 Jalankan MLflow dengan path absolut..."
           mlflow run "$GITHUB_WORKSPACE/Workflow-CI/MLProject" --env-manager local
 
       - name: Upload artifacts
@@ -35,5 +37,4 @@ jobs:
           path: Workflow-CI/MLProject/mlruns
 
       - name: Success Message
-        run: echo "🎉 Model berhasil dilatih dan diunggah ke artifacts."
-
+        run: echo "🎉 Workflow berhasil dijalankan tanpa error!"
