@@ -1,0 +1,47 @@
+
+📘 Workflow CI – Kriteria 3: Membangun Workflow CI (Advanced)
+
+🧱 Struktur Repositori
+Workflow-CI/
+├── MLProject/
+│   ├── modelling.py
+│   ├── conda.yaml
+│   ├── MLProject
+│   ├── namadataset_preprocessing/
+│   ├── Tautan-ke-DockerHub.txt
+│   ├── mlruns/
+│   │   └── 903483739151333902/
+│   │       └── 9a9da4b8811c4d5daeb7dc0ea73d2d94/
+│   │           └── artifacts/
+│   │               └── model/
+│   │                   ├── conda.yaml
+│   │                   ├── MLmodel
+│   │                   ├── model.pkl
+│   │                   ├── python_env.yaml
+│   │                   └── requirements.txt
+│   └── docker_context/
+│       ├── Dockerfile
+│       ├── conda.yaml
+│       └── requirements.txt
+└── .github/workflows/workflow-ci.yml
+
+⚙️ Eksekusi Modelling & Training
+python modelling.py
+🎯 Akurasi: 0.8262 | model tersimpan di run 9a9da4b8811c4d5daeb7dc0ea73d2d94
+Artefak lengkap tersimpan di MLflow.
+
+🐳 Docker Build
+mlflow models build-docker -m "mlruns/903483739151333902/9a9da4b8811c4d5daeb7dc0ea73d2d94/artifacts/model" -n eka-fanya-model
+✅ Dockerfile & docker_context berhasil dibuat.
+
+🔧 Workflow CI di GitHub Actions
+- Retraining otomatis berjalan setiap push.
+- Artefak tersimpan di mlruns/.
+- Docker image dibuat & siap push ke Docker Hub.
+
+✅ Kesimpulan
+Basic (2 pts)  → retraining otomatis ✔️
+Skilled (3 pts) → artefak tersimpan ✔️
+Advanced (4 pts) → Docker image siap di-push ✔️
+
+📈 Kriteria 3 – Advanced (4 Poin) TERCAPAI 🎯
