@@ -16,19 +16,18 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       - name: Install dependencies
         run: |
           pip install mlflow==2.19.0 scikit-learn==1.6.1 pandas numpy
 
-      # ✅ FIX: Jalankan pakai path absolut ke Workflow-CI/MLProject
+      # 👇 BAGIAN INI YANG FIX — pakai path absolut, bukan titik (.)
       - name: Run MLflow Project (Train Model)
         run: |
-          echo "🧭 Current path: $GITHUB_WORKSPACE"
-          echo "📁 List isi folder root:"
+          echo "Current dir: $GITHUB_WORKSPACE"
           ls -R "$GITHUB_WORKSPACE"
-          echo "🚀 Menjalankan MLflow dari path absolut..."
+          echo "Running MLflow from Workflow-CI/MLProject..."
           mlflow run "$GITHUB_WORKSPACE/Workflow-CI/MLProject" --env-manager local
 
       - name: Upload model artifacts
@@ -37,5 +36,5 @@ jobs:
           name: trained-model
           path: Workflow-CI/MLProject/mlruns
 
-      - name: Notify Success
-        run: echo "🎉 Training & artifact upload selesai tanpa error!"
+      - name: Done
+        run: echo "✅ Workflow finished successfully."
