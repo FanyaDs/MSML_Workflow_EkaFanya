@@ -1,0 +1,15 @@
+artifact_uri: file:///content/drive/MyDrive/SMSML_Eka-Fanya-Yohana-Dasilva/Membangun_model/mlruns/160905468784042404/80c46cfc898f406e9f4392b5287bc8a8/artifacts
+end_time: 1760211612727
+entry_point_name: ''
+experiment_id: '160905468784042404'
+lifecycle_stage: active
+run_id: 80c46cfc898f406e9f4392b5287bc8a8
+run_name: polite-shrew-91
+run_uuid: 80c46cfc898f406e9f4392b5287bc8a8
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760211444211
+status: 3
+tags: []
+user_id: root

@@ -1,0 +1,9 @@
+digest: 93c81a2b
+name: dataset
+profile: '{"features_shape": [2186, 5000], "features_size": 10930000, "features_nbytes":
+  87440000}'
+schema: '{"mlflow_tensorspec": {"features": "[{\"type\": \"tensor\", \"tensor-spec\":
+  {\"dtype\": \"float64\", \"shape\": [-1, 5000]}}]", "targets": null}}'
+source: '{"tags": {"mlflow.user": "root", "mlflow.source.name": "/usr/local/lib/python3.12/dist-packages/colab_kernel_launcher.py",
+  "mlflow.source.type": "LOCAL"}}'
+source_type: code

@@ -1,0 +1,15 @@
+artifact_uri: file:///content/drive/MyDrive/SMSML_Eka-Fanya-Yohana-Dasilva/mlruns/333257197443536383/18c686683fd7435090e2fdb7796116a9/artifacts
+end_time: 1760263411986
+entry_point_name: ''
+experiment_id: '333257197443536383'
+lifecycle_stage: active
+run_id: 18c686683fd7435090e2fdb7796116a9
+run_name: Training_RF_Model
+run_uuid: 18c686683fd7435090e2fdb7796116a9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760263388297
+status: 3
+tags: []
+user_id: root

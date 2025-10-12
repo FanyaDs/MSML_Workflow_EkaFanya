@@ -1,0 +1,15 @@
+artifact_uri: file:///content/drive/MyDrive/SMSML_Eka-Fanya-Yohana-Dasilva/Membangun_model/mlruns/160905468784042404/b689a4663d9943b3b57fda03de684a08/artifacts
+end_time: 1760211612727
+entry_point_name: ''
+experiment_id: '160905468784042404'
+lifecycle_stage: active
+run_id: b689a4663d9943b3b57fda03de684a08
+run_name: intrigued-chimp-181
+run_uuid: b689a4663d9943b3b57fda03de684a08
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760211444211
+status: 3
+tags: []
+user_id: root

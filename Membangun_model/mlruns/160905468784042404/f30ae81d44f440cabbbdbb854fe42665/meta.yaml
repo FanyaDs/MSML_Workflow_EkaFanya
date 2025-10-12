@@ -1,0 +1,15 @@
+artifact_uri: file:///content/drive/MyDrive/SMSML_Eka-Fanya-Yohana-Dasilva/Membangun_model/mlruns/160905468784042404/f30ae81d44f440cabbbdbb854fe42665/artifacts
+end_time: 1760211612727
+entry_point_name: ''
+experiment_id: '160905468784042404'
+lifecycle_stage: active
+run_id: f30ae81d44f440cabbbdbb854fe42665
+run_name: suave-owl-701
+run_uuid: f30ae81d44f440cabbbdbb854fe42665
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760211444211
+status: 3
+tags: []
+user_id: root

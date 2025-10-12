@@ -1,0 +1,15 @@
+artifact_uri: file:///content/mlruns/187547707748576649/d7a32affb1934ec1bc8280e2f4cab49a/artifacts
+end_time: 1760206837624
+entry_point_name: ''
+experiment_id: '187547707748576649'
+lifecycle_stage: active
+run_id: d7a32affb1934ec1bc8280e2f4cab49a
+run_name: agreeable-hawk-894
+run_uuid: d7a32affb1934ec1bc8280e2f4cab49a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760206816363
+status: 3
+tags: []
+user_id: root

@@ -1,0 +1,15 @@
+artifact_uri: file:///content/mlruns/187547707748576649/48ad5159607e42069d85f2f45f35d722/artifacts
+end_time: 1760207632240
+entry_point_name: ''
+experiment_id: '187547707748576649'
+lifecycle_stage: active
+run_id: 48ad5159607e42069d85f2f45f35d722
+run_name: RandomForest_TFIDF_Basic
+run_uuid: 48ad5159607e42069d85f2f45f35d722
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760207602557
+status: 3
+tags: []
+user_id: root

@@ -1,0 +1,7 @@
+Eksperimen terhadap Dataset Pelatihan - Dicoding MSML
+Nama: Eka Fanya Yohana Dasilva
+Repository: https://github.com/FanyaDs/Eksperimen_SML_Eka-Fanya-Yohana-Dasilva
+Dataset: Dataset for Indonesian Sentiment Analysis (Kaggle)
+Jumlah Data Akhir: 10.933
+Kolom: text, sentiment, clean_text
+Status: ✅ Skilled Complete

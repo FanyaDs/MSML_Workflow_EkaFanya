@@ -1,0 +1,15 @@
+artifact_uri: file:///content/drive/MyDrive/SMSML_Eka-Fanya-Yohana-Dasilva/Membangun_model/mlruns/160905468784042404/87e6d6372c6f492692b8a005f8ee6505/artifacts
+end_time: 1760211073444
+entry_point_name: ''
+experiment_id: '160905468784042404'
+lifecycle_stage: active
+run_id: 87e6d6372c6f492692b8a005f8ee6505
+run_name: unleashed-fish-602
+run_uuid: 87e6d6372c6f492692b8a005f8ee6505
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760211067186
+status: 3
+tags: []
+user_id: root

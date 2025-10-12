@@ -1,0 +1,15 @@
+artifact_uri: file:///content/mlruns/187547707748576649/fe74c2bb5c1547fead2ae111325cbb26/artifacts
+end_time: 1760211064608
+entry_point_name: ''
+experiment_id: '187547707748576649'
+lifecycle_stage: active
+run_id: fe74c2bb5c1547fead2ae111325cbb26
+run_name: glamorous-hare-563
+run_uuid: fe74c2bb5c1547fead2ae111325cbb26
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760210892493
+status: 3
+tags: []
+user_id: root

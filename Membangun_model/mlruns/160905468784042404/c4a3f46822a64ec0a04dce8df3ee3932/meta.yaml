@@ -1,0 +1,15 @@
+artifact_uri: file:///content/drive/MyDrive/SMSML_Eka-Fanya-Yohana-Dasilva/Membangun_model/mlruns/160905468784042404/c4a3f46822a64ec0a04dce8df3ee3932/artifacts
+end_time: 1760211615527
+entry_point_name: ''
+experiment_id: '160905468784042404'
+lifecycle_stage: active
+run_id: c4a3f46822a64ec0a04dce8df3ee3932
+run_name: upset-chimp-912
+run_uuid: c4a3f46822a64ec0a04dce8df3ee3932
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760211444211
+status: 3
+tags: []
+user_id: root
