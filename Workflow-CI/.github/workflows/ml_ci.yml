@@ -22,9 +22,10 @@ jobs:
         run: |
           pip install mlflow==2.19.0 scikit-learn==1.6.1 pandas numpy
 
-      # 💡 Jalankan mlflow run langsung pakai path absolut ke Workflow-CI/MLProject
+      # 💡 Jalankan MLflow project dari path yang benar
       - name: Run MLflow Project (Train Model)
         run: |
+          echo "Current path: $GITHUB_WORKSPACE"
           mlflow run "$GITHUB_WORKSPACE/Workflow-CI/MLProject" --env-manager local
 
       - name: Upload model artifacts
@@ -34,4 +35,4 @@ jobs:
           path: Workflow-CI/MLProject/mlruns
 
       - name: Notify Success
-        run: echo "🎉 Training & Artifact upload selesai dengan sukses!"
+        run: echo "🎉 Training & artifact upload selesai!"
