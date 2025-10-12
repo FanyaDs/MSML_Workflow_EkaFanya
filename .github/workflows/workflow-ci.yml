@@ -58,6 +58,9 @@ jobs:
       - name: Build and push Docker image
         run: |
           cd MLProject
-          mlflow models build-docker -m "runs:/0/model" -n eka-fanya-model
+          # ambil run ID terakhir dari mlruns folder
+          RUN_ID=$(ls -t mlruns/0 | head -1)
+          echo "Detected latest run ID: $RUN_ID"
+          mlflow models build-docker -m "mlruns/0/$RUN_ID/artifacts/model" -n eka-fanya-model
           docker tag eka-fanya-model ${{ secrets.DOCKERHUB_USERNAME }}/eka-fanya-model:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/eka-fanya-model:latest
