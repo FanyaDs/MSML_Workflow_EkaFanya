@@ -23,8 +23,8 @@ jobs:
           pip install mlflow==2.19.0 scikit-learn==1.6.1 pandas numpy
 
       - name: Run MLflow Project (Train Model)
-        working-directory: Workflow-CI/MLProject
         run: |
+          cd Workflow-CI/MLProject
           mlflow run . --env-manager local
 
       - name: Upload model artifacts
