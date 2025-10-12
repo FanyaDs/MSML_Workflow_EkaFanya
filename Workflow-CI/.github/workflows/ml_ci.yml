@@ -1,0 +1,37 @@
+name: MLflow Workflow CI
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install mlflow==2.19.0 scikit-learn==1.6.1 pandas numpy
+
+      - name: Run MLflow Project (Train Model)
+        working-directory: Workflow-CI/MLProject
+        run: |
+          mlflow run . --env-manager local
+
+      - name: Upload model artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: trained-model
+          path: Workflow-CI/MLProject/mlruns
+
+      - name: Notify Success
+        run: echo "🎉 Training & Artifact upload selesai dengan sukses!"
