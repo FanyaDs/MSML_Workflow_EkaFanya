@@ -27,18 +27,24 @@ jobs:
           mlflow run . --env-manager local
 
       - name: Upload MLflow artifacts
-        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: mlflow-artifacts
-          path: MLProject/mlruns
+          name: mlruns
+          path: MLProject/mlruns/
 
   docker:
     needs: retrain
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Download artifacts from retrain job
+        uses: actions/download-artifact@v4
+        with:
+          name: mlruns
+          path: MLProject/mlruns/
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -58,8 +64,7 @@ jobs:
       - name: Build and push Docker image
         run: |
           cd MLProject
-          # ambil run ID terakhir dari mlruns folder
-          RUN_ID=$(ls -t mlruns/0 | head -1)
+          RUN_ID=$(ls -td mlruns/0/*/ | head -1 | xargs -n 1 basename)
           echo "Detected latest run ID: $RUN_ID"
           mlflow models build-docker -m "mlruns/0/$RUN_ID/artifacts/model" -n eka-fanya-model
           docker tag eka-fanya-model ${{ secrets.DOCKERHUB_USERNAME }}/eka-fanya-model:latest
