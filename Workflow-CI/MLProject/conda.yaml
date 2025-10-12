@@ -1,4 +1,6 @@
-name: msml_fanya_env
+name: msml_env
+channels:
+  - defaults
 dependencies:
   - python=3.12
   - pip

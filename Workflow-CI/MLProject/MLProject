@@ -1,5 +1,4 @@
-name: msml_fanya_project
-conda_env: conda.yaml
+name: MSML_Workflow_Fanya
 entry_points:
   main:
     command: "python modelling.py"

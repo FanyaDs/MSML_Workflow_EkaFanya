@@ -1,15 +1,6 @@
-# MSML Workflow CI — Eka Fanya
+# Workflow-CI Project (MSML)
+Folder ini berisi workflow CI untuk retraining model otomatis menggunakan MLflow.
 
-Otomatisasi retraining model Machine Learning setiap kali ada perubahan di branch `main`.
-
-## Struktur
-- `.github/workflows/ml_ci.yml` — GitHub Actions untuk retraining otomatis.
-- `MLProject/` — MLflow Project dan environment.
-- `modelling.py` — Script training model Random Forest.
-- `namadataset_preprocessing/` — Data hasil preprocessing dari Eksperimen.
-
-## Langkah Kerja
-1. Commit & push perubahan ke branch `main`.
-2. Workflow otomatis jalan via GitHub Actions.
-3. Model dilatih ulang menggunakan MLflow Project.
-4. Artefak hasil training tersimpan otomatis di Actions.
+Struktur:
+- MLProject: berisi file training (`modelling.py`), dataset, dan environment (`conda.yaml`)
+- Workflow-CI.txt: berisi catatan workflow untuk submission Dicoding
