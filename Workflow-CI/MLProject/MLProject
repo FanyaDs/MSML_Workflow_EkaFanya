@@ -1,4 +1,8 @@
-name: MSML_Workflow_Fanya
+name: msml_workflow
+conda_env: conda.yaml
+
 entry_points:
   main:
-    command: "python modelling.py"
+    parameters:
+      data_path: {type: str, default: "namadataset_preprocessing"}
+    command: "python modelling.py --data_path {data_path}"
