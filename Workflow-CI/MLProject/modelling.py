@@ -20,7 +20,7 @@ print("🚀 [DEBUG] modelling.py berhasil dijalankan")
 print("📂 Working Directory :", os.getcwd())
 print("==============================================")
 
-# Aktifkan autolog (biar MLflow yang handle run & logging)
+# Aktifkan autolog (MLflow yang handle run & logging)
 mlflow.autolog()
 
 # ===============================================================
@@ -66,7 +66,7 @@ clf = RandomForestClassifier(n_estimators=100, random_state=42)
 clf.fit(X_train_vec, y_train)
 y_pred = clf.predict(X_test_vec)
 
-# Hitung metrik (buat ditampilkan di log)
+# Hitung metrik (buat ditampilkan di log CI)
 acc = accuracy_score(y_test, y_pred)
 prec = precision_score(y_test, y_pred, average="weighted", zero_division=0)
 rec = recall_score(y_test, y_pred, average="weighted", zero_division=0)
@@ -80,7 +80,7 @@ print(f"🏆 F1-score : {f1:.4f}")
 print("==============================================")
 
 # ===============================================================
-# [5] SIMPAN ARTEFAK TAMBAHAN (OPSIONAL)
+# [5] SIMPAN ARTEFAK TAMBAHAN
 # ===============================================================
 artifacts_dir = os.path.join(base_path, "artifacts")
 os.makedirs(artifacts_dir, exist_ok=True)
