@@ -56,13 +56,13 @@ X_train_vec = vectorizer.fit_transform(X_train)
 X_test_vec = vectorizer.transform(X_test)
 
 # ===============================================================
-# [4] START RUN (AMAN UNTUK MLFLOW PROJECT)
+# [4] START RUN — aman untuk MLflow Project
 # ===============================================================
-print("🧭 Membuat run MLflow...")
+print("🧭 Memulai run MLflow dengan mode nested...")
 with mlflow.start_run(nested=True):  # ⭐ FIX PALING PENTING
     print("🚀 Training RandomForest dimulai...")
 
-    # TRAIN MODEL
+    # TRAIN
     clf = RandomForestClassifier(n_estimators=100, random_state=42)
     clf.fit(X_train_vec, y_train)
     y_pred = clf.predict(X_test_vec)
@@ -80,13 +80,12 @@ with mlflow.start_run(nested=True):  # ⭐ FIX PALING PENTING
     print(f"🏆 F1-score : {f1:.4f}")
     print("==============================================")
 
-    # LOG METRICS
+    # LOGGING
     mlflow.log_metric("accuracy", acc)
     mlflow.log_metric("precision", prec)
     mlflow.log_metric("recall", rec)
     mlflow.log_metric("f1_score", f1)
 
-    # PARAMETER
     mlflow.log_param("n_estimators", 100)
     mlflow.log_param("random_state", 42)
     mlflow.log_param("vectorizer", "CountVectorizer")
@@ -94,18 +93,18 @@ with mlflow.start_run(nested=True):  # ⭐ FIX PALING PENTING
     # SAVE MODEL
     mlflow.sklearn.log_model(clf, artifact_path="model")
 
-    # SAVE EXTRAS
+    # EXTRA ARTIFACTS
     artifacts_dir = os.path.join(base_path, "artifacts")
     os.makedirs(artifacts_dir, exist_ok=True)
 
-    vectorizer_path = os.path.join(artifacts_dir, "vectorizer.pkl")
-    joblib.dump(vectorizer, vectorizer_path)
-    mlflow.log_artifact(vectorizer_path)
+    vec_path = os.path.join(artifacts_dir, "vectorizer.pkl")
+    joblib.dump(vectorizer, vec_path)
+    mlflow.log_artifact(vec_path)
 
-    report_path = os.path.join(artifacts_dir, "metrics_report.txt")
-    with open(report_path, "w") as f:
+    rep_path = os.path.join(artifacts_dir, "metrics_report.txt")
+    with open(rep_path, "w") as f:
         f.write(classification_report(y_test, y_pred))
-    mlflow.log_artifact(report_path)
+    mlflow.log_artifact(rep_path)
 
 print("🎉 Training selesai tanpa error.")
 print("==============================================")
