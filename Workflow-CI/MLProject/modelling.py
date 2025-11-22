@@ -20,6 +20,9 @@ print("🚀 [DEBUG] modelling.py berhasil dijalankan")
 print("📂 Working Directory :", os.getcwd())
 print("==============================================")
 
+# Aktifkan autolog (biar MLflow yang handle run & logging)
+mlflow.autolog()
+
 # ===============================================================
 # [1] LOAD DATASET
 # ===============================================================
@@ -34,6 +37,7 @@ try:
     df["clean_text"] = df["clean_text"].astype(str).str.strip()
 
     print(f"✅ Dataset berhasil dimuat ({len(df)} baris)")
+    print(df.head(3))
 except Exception as e:
     print(f"❌ Gagal memuat dataset: {e}")
     df = pd.DataFrame({"clean_text": ["fallback"], "label": [0]})
@@ -56,55 +60,42 @@ X_train_vec = vectorizer.fit_transform(X_train)
 X_test_vec = vectorizer.transform(X_test)
 
 # ===============================================================
-# [4] START RUN — aman untuk MLflow Project
+# [4] TRAINING MODEL
 # ===============================================================
-print("🧭 Memulai run MLflow dengan mode nested...")
-with mlflow.start_run(nested=True):  # ⭐ FIX PALING PENTING
-    print("🚀 Training RandomForest dimulai...")
+clf = RandomForestClassifier(n_estimators=100, random_state=42)
+clf.fit(X_train_vec, y_train)
+y_pred = clf.predict(X_test_vec)
 
-    # TRAIN
-    clf = RandomForestClassifier(n_estimators=100, random_state=42)
-    clf.fit(X_train_vec, y_train)
-    y_pred = clf.predict(X_test_vec)
+# Hitung metrik (buat ditampilkan di log)
+acc = accuracy_score(y_test, y_pred)
+prec = precision_score(y_test, y_pred, average="weighted", zero_division=0)
+rec = recall_score(y_test, y_pred, average="weighted", zero_division=0)
+f1 = f1_score(y_test, y_pred, average="weighted", zero_division=0)
 
-    # METRICS
-    acc = accuracy_score(y_test, y_pred)
-    prec = precision_score(y_test, y_pred, average="weighted", zero_division=0)
-    rec = recall_score(y_test, y_pred, average="weighted", zero_division=0)
-    f1 = f1_score(y_test, y_pred, average="weighted", zero_division=0)
+print("==============================================")
+print(f"🔢 Accuracy : {acc:.4f}")
+print(f"🎯 Precision: {prec:.4f}")
+print(f"📈 Recall   : {rec:.4f}")
+print(f"🏆 F1-score : {f1:.4f}")
+print("==============================================")
 
-    print("==============================================")
-    print(f"🔢 Accuracy : {acc:.4f}")
-    print(f"🎯 Precision: {prec:.4f}")
-    print(f"📈 Recall   : {rec:.4f}")
-    print(f"🏆 F1-score : {f1:.4f}")
-    print("==============================================")
+# ===============================================================
+# [5] SIMPAN ARTEFAK TAMBAHAN (OPSIONAL)
+# ===============================================================
+artifacts_dir = os.path.join(base_path, "artifacts")
+os.makedirs(artifacts_dir, exist_ok=True)
 
-    # LOGGING
-    mlflow.log_metric("accuracy", acc)
-    mlflow.log_metric("precision", prec)
-    mlflow.log_metric("recall", rec)
-    mlflow.log_metric("f1_score", f1)
+vec_path = os.path.join(artifacts_dir, "vectorizer_ci.pkl")
+joblib.dump(vectorizer, vec_path)
 
-    mlflow.log_param("n_estimators", 100)
-    mlflow.log_param("random_state", 42)
-    mlflow.log_param("vectorizer", "CountVectorizer")
+rep_path = os.path.join(artifacts_dir, "metrics_report_ci.txt")
+with open(rep_path, "w") as f:
+    f.write("=== MODEL METRICS REPORT (CI) ===\n")
+    f.write(f"Accuracy  : {acc:.4f}\n")
+    f.write(f"Precision : {prec:.4f}\n")
+    f.write(f"Recall    : {rec:.4f}\n")
+    f.write(f"F1-score  : {f1:.4f}\n\n")
+    f.write(classification_report(y_test, y_pred))
 
-    # SAVE MODEL
-    mlflow.sklearn.log_model(clf, artifact_path="model")
-
-    # EXTRA ARTIFACTS
-    artifacts_dir = os.path.join(base_path, "artifacts")
-    os.makedirs(artifacts_dir, exist_ok=True)
-
-    vec_path = os.path.join(artifacts_dir, "vectorizer.pkl")
-    joblib.dump(vectorizer, vec_path)
-    mlflow.log_artifact(vec_path)
-
-    rep_path = os.path.join(artifacts_dir, "metrics_report.txt")
-    with open(rep_path, "w") as f:
-        f.write(classification_report(y_test, y_pred))
-    mlflow.log_artifact(rep_path)
-
-print("🎉 Training selesai tanpa error.")
+print("🎉 Training selesai tanpa error (CI).")
 print("==============================================")
